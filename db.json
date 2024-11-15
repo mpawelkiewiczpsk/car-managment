@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Joe Doe",
+      "age": 100,
+      "address": "Kielce ul. Warszawska"
+    },
+    {
+      "id": "2",
+      "name": "Marian Kowalski",
+      "age": 200,
+      "address": "Warszawa ul. Kielecka"
+    }
+  ]
+}
