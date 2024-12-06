@@ -1,16 +1,246 @@
 {
+  "admins" : [
+    {
+      "id": "1",
+      "login": "admin1",
+      "pass": "admin1"
+    },
+    {
+      "id": "2",
+      "login": "admin2",
+      "pass": "admin2"
+    }
+  ],
   "users": [
     {
       "id": "1",
-      "name": "Joe Doe",
+      "name": "Joe Doe edited",
       "age": 100,
-      "address": "Kielce ul. Warszawska"
+      "address": "Kielce ul. Warszawska",
+      "discount": 0.1
     },
     {
       "id": "2",
       "name": "Marian Kowalski",
       "age": 200,
-      "address": "Warszawa ul. Kielecka"
+      "address": "Warszawa ul. Kielecka",
+      "discount": 0.15
+    },
+    {
+      "id": "3",
+      "name": "Anna Nowak",
+      "age": 30,
+      "address": "Gdańsk ul. Morska",
+      "discount": 0.05
+    },
+    {
+      "id": "4",
+      "name": "Janina Wiśniewska",
+      "age": 40,
+      "address": "Poznań ul. Szpitalna",
+      "discount": 0.2
+    },
+    {
+      "id": "5",
+      "name": "Krzysztof Krawczyk",
+      "age": 50,
+      "address": "Łódź ul. Wesoła",
+      "discount": 0.25
+    },
+    {
+      "id": "6",
+      "name": "Barbara Lewandowska",
+      "age": 35,
+      "address": "Kraków ul. Grodzka",
+      "discount": 0.1
+    },
+    {
+      "id": "7",
+      "name": "Tomasz Zieliński",
+      "age": 28,
+      "address": "Wrocław ul. Piękna",
+      "discount": 0.05
+    },
+    {
+      "id": "8",
+      "name": "Magdalena Maj",
+      "age": 24,
+      "address": "Sopot ul. Plażowa",
+      "discount": 0.15
+    }
+  ],
+  "cars": [
+    {
+      "id": "1",
+      "brand": "Toyota",
+      "model": "Corolla",
+      "year": 2020,
+      "color": "White",
+      "pricePerDay": 100
+    },
+    {
+      "id": "2",
+      "brand": "Honda",
+      "model": "Civic",
+      "year": 2019,
+      "color": "Black",
+      "pricePerDay": 120
+    },
+    {
+      "id": "3",
+      "brand": "Ford",
+      "model": "Focus",
+      "year": 2021,
+      "color": "Blue",
+      "pricePerDay": 110
+    },
+    {
+      "id": "4",
+      "brand": "BMW",
+      "model": "320i",
+      "year": 2022,
+      "color": "Gray",
+      "pricePerDay": 200
+    },
+    {
+      "id": "5",
+      "brand": "Mercedes",
+      "model": "C-Class",
+      "year": 2018,
+      "color": "Silver",
+      "pricePerDay": 180
+    },
+    {
+      "id": "6",
+      "brand": "Volkswagen",
+      "model": "Golf",
+      "year": 2020,
+      "color": "Red",
+      "pricePerDay": 90
+    },
+    {
+      "id": "7",
+      "brand": "Audi",
+      "model": "A4",
+      "year": 2019,
+      "color": "White",
+      "pricePerDay": 150
+    },
+    {
+      "id": "8",
+      "brand": "Hyundai",
+      "model": "Elantra",
+      "year": 2021,
+      "color": "Blue",
+      "pricePerDay": 95
+    },
+    {
+      "id": "9",
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2022,
+      "color": "Black",
+      "pricePerDay": 250
+    },
+    {
+      "id": "10",
+      "brand": "Kia",
+      "model": "Ceed",
+      "year": 2020,
+      "color": "Green",
+      "pricePerDay": 85
+    }
+  ],
+  "rentals": [
+    {
+      "userId": "1",
+      "carId": "2",
+      "rentalDate": "2024-12-01",
+      "returnDate": "2024-12-05",
+      "amountToPay": 432,
+      "isReturned": true,
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "userId": "3",
+      "carId": "4",
+      "rentalDate": "2024-12-02",
+      "returnDate": "2024-12-08",
+      "amountToPay": 1140,
+      "isReturned": false
+    },
+    {
+      "id": "3",
+      "userId": "5",
+      "carId": "6",
+      "rentalDate": "2024-12-03",
+      "returnDate": "2024-12-06",
+      "amountToPay": 202.5,
+      "isReturned": false
+    },
+    {
+      "id": "4",
+      "userId": "2",
+      "carId": "3",
+      "rentalDate": "2024-12-04",
+      "returnDate": "2024-12-07",
+      "amountToPay": 280.5,
+      "isReturned": true
+    },
+    {
+      "id": "5",
+      "userId": "4",
+      "carId": "1",
+      "rentalDate": "2024-12-05",
+      "returnDate": "2024-12-10",
+      "amountToPay": 400,
+      "isReturned": true
+    },
+    {
+      "id": "6",
+      "userId": "6",
+      "carId": "7",
+      "rentalDate": "2024-12-06",
+      "returnDate": "2024-12-11",
+      "amountToPay": 675,
+      "isReturned": true
+    },
+    {
+      "id": "7",
+      "userId": "7",
+      "carId": "8",
+      "rentalDate": "2024-12-07",
+      "returnDate": "2024-12-12",
+      "amountToPay": 451.25,
+      "isReturned": true
+    },
+    {
+      "id": "8",
+      "userId": "8",
+      "carId": "9",
+      "rentalDate": "2024-12-08",
+      "returnDate": "2024-12-10",
+      "amountToPay": 425,
+      "isReturned": true
+    },
+    {
+      "id": "9",
+      "userId": "3",
+      "carId": "5",
+      "rentalDate": "2024-12-09",
+      "returnDate": "2024-12-14",
+      "amountToPay": 684,
+      "isReturned": true
+    },
+    {
+      "id": "10",
+      "userId": "1",
+      "carId": "10",
+      "rentalDate": "2024-12-10",
+      "returnDate": "2024-12-15",
+      "amountToPay": 382.5,
+      "isReturned": true
     }
   ]
 }

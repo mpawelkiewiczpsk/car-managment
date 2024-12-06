@@ -1,95 +1,106 @@
-import React from "react";
-import { Space, Table, Tag, Typography } from "antd";
-import type { TableProps } from "antd";
+import React, { useState, useEffect } from "react";
+import { Table, Tag } from "antd";
+import axiosInstance from "../api/axiosInstance.ts";
 
-const { Title } = Typography;
+const RentalsList = () => {
+  const [rentals, setRentals] = useState([]);
 
-interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
-}
+  const getData = () => {
+    Promise.all([
+      axiosInstance.get("/rentals"),
+      axiosInstance.get("/users"),
+      axiosInstance.get("/cars"),
+    ])
+      .then(([rentalsRes, usersRes, carsRes]) => {
+        const rentalsData = rentalsRes.data;
+        const usersData = usersRes.data;
+        const carsData = carsRes.data;
 
-const columns: TableProps<DataType>["columns"] = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "loser") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
+        const mergedRentals = rentalsData.map((rental) => {
+          const user = usersData.find((u) => u.id === rental.userId);
+          const car = carsData.find((c) => c.id === rental.carId);
+          return {
+            ...rental,
+            userName: user ? user.name : "Unknown User",
+            carName: car ? `${car.brand} ${car.model}` : "Unknown Car",
+          };
+        });
+        setRentals(mergedRentals);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  };
 
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-];
+  useEffect(() => {
+    getData();
+  }, []);
 
-const CarRent: React.FC = () => (
-  <>
-    <Title>Car rent</Title>
-    <Table<DataType> columns={columns} dataSource={data} />
-  </>
-);
+  const onChange = (data) => {
+    axiosInstance.put(`/rentals/${data.id}`, data).then(() => {
+      getData();
+    });
+  };
 
-export default CarRent;
+  const columns = [
+    {
+      title: "Rental ID",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "User",
+      dataIndex: "userName",
+      key: "userName",
+    },
+    {
+      title: "Car",
+      dataIndex: "carName",
+      key: "carName",
+    },
+    {
+      title: "Rental Date",
+      dataIndex: "rentalDate",
+      key: "rentalDate",
+    },
+    {
+      title: "Return Date",
+      dataIndex: "returnDate",
+      key: "returnDate",
+    },
+    {
+      title: "Amount to Pay (PLN)",
+      dataIndex: "amountToPay",
+      key: "amountToPay",
+    },
+    {
+      title: "Returned",
+      dataIndex: "isReturned",
+      key: "isReturned",
+      render: (isReturned, data) => {
+        const newData = {
+          ...data,
+          carName: undefined,
+          userName: undefined,
+          isReturned: !isReturned,
+        };
+
+        return (
+          <Tag
+            color={isReturned ? "green" : "red"}
+            onClick={() => onChange(newData)}
+          >
+            {isReturned ? "Yes" : "No"}
+          </Tag>
+        );
+      },
+    },
+  ];
+
+  return (
+    <div>
+      <h1>Rentals List</h1>
+      <Table dataSource={rentals} columns={columns} rowKey="id" />
+    </div>
+  );
+};
+
+export default RentalsList;
